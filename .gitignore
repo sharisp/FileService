@@ -1,0 +1,54 @@
+## Ignore Visual Studio temporary files, build results, and
+## user-specific files
+
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+
+
+# Rider / JetBrains IDE
+.idea/
+*.sln.iml
+
+# VS Code settings
+.vscode/
+.vs
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Configuration files
+appsettings.*.json
+
+# Backup & logs
+*.bak
+*.log
+
+# Test results
+TestResults/
+*.trx
+
+# Web output
+wwwroot/lib/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# DotCover
+*.dotCover
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Azure build artifacts
+*.azure*
+
+# Entity Framework Migrations snapshots (optional)
+Migrations/*.Designer.cs
