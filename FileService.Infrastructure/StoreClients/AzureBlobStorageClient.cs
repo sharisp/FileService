@@ -1,9 +1,7 @@
 ﻿using Azure.Storage.Blobs;
 using FileService.Domain.Enums;
 using FileService.Domain.Interface;
-using FileService.Infrastructure.Options;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace FileService.Infrastructure.StoreClients
 {

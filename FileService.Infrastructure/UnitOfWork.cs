@@ -1,7 +1,5 @@
 ﻿using Domain.SharedKernel.BaseEntity;
 using Domain.SharedKernel.Interfaces;
-using FileService.Domain;
-using FileService.Domain.Interface;
 using FileService.Infrastructure.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

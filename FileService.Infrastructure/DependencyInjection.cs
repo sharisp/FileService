@@ -1,11 +1,9 @@
 ﻿using Amazon.S3;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Domain.SharedKernel.HelperFunctions;
 using Domain.SharedKernel.Interfaces;
 using FileService.Domain;
 using FileService.Domain.Interface;
-using FileService.Domain.Service;
 using FileService.Infrastructure.Options;
 using FileService.Infrastructure.Repository;
 using FileService.Infrastructure.StoreClients;

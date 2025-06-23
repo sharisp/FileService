@@ -1,8 +1,4 @@
-﻿using System.Reflection;
-using Domain.SharedKernel;
-using Domain.SharedKernel.HelperFunctions;
-using Domain.SharedKernel.Interfaces;
-using FileService.Domain.Interface;
+﻿using Domain.SharedKernel;
 using FileService.Domain.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

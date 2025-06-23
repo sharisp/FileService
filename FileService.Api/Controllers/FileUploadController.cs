@@ -51,7 +51,7 @@ namespace FileService.Api.Controllers
         }
 
         [HttpPost("FileExists")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<ApiResponse<CheckFileExistsResponseDto>>> CheckFileExists(CheckFileExistsRequestDto dto, CancellationToken cancellationToken = default)
         {
             await ValidationHelper.ValidateModelAsync(dto, validator);
@@ -64,7 +64,7 @@ namespace FileService.Api.Controllers
 
             var (exists, existFileUpload) = await fileUploadRepository.CheckFileExistsAsync(dto.FileHash, dto.FileSizeBytes);
 
-            return Ok(ApiResponse<CheckFileExistsResponseDto>.Ok(new CheckFileExistsResponseDto(exists, existFileUpload?.GetPublicUri())));
+            return Ok(ApiResponse<CheckFileExistsResponseDto>.Excute(exists,"",200,new CheckFileExistsResponseDto(exists, existFileUpload?.GetPublicUri())));
 
         }
 
