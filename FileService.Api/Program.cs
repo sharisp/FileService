@@ -1,10 +1,12 @@
 
 using Common.Jwt;
+using FileService.Api.Controllers;
 using FileService.Api.MiddleWares;
 using FileService.Domain;
 using FileService.Infrastructure;
 using FluentValidation;
 using System.Reflection;
+using Domain.SharedKernel.Interfaces;
 
 namespace FileService.Api
 {
@@ -27,6 +29,10 @@ namespace FileService.Api
          
             builder.Services.AddJWTAuthentication(builder.Configuration);
             builder.Services.AddFileInfrastructure(builder.Configuration);
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+                typeof(IUnitOfWork).Assembly,
+                typeof(FileUploadController).Assembly //
+            ));
             var app = builder.Build();
             app.UseMiddleware<CustomerExceptionMiddleware>();
             // Configure the HTTP request pipeline.

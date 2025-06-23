@@ -56,7 +56,7 @@ namespace FileService.Infrastructure
             //services.AddScoped<IStorageClient, UpYunStorageClient>();
             services.AddScoped<IFileStorageClient, AwsS3StorageClient>();
             services.AddScoped<IFileUploadRepository, FileUploadRepository>();
-            services.AddDomainSructure(configuration);
+            services.AddDomainStructureCollection(configuration);
             services.AddScoped<ICurrentUser, CurrentUser>();
       
             services.AddScoped<IUnitOfWork,UnitOfWork>();

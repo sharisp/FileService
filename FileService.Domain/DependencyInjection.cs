@@ -11,14 +11,11 @@ namespace FileService.Domain
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddDomainSructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDomainStructureCollection(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             services.AddDomainShardKernelCollection(configuration);
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-            });
+       
             services.AddScoped<FileUploadService>();
 
             return services;
