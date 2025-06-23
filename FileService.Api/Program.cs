@@ -1,6 +1,7 @@
 
 using Common.Jwt;
 using FileService.Api.MiddleWares;
+using FileService.Domain;
 using FileService.Infrastructure;
 using FluentValidation;
 using System.Reflection;
@@ -19,11 +20,12 @@ namespace FileService.Api
             builder.Services.AddEndpointsApiExplorer();
 
 
+            builder.Services.AddHttpContextAccessor(); //for accessing HttpContext in services IHttpContextAccessor
+         
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSwagger_AuthSetup();
+         
             builder.Services.AddJWTAuthentication(builder.Configuration);
-
             builder.Services.AddFileInfrastructure(builder.Configuration);
             var app = builder.Build();
             app.UseMiddleware<CustomerExceptionMiddleware>();

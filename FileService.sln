@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileService.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileService.Api", "FileService.Api\FileService.Api.csproj", "{A5630740-F26D-412B-AF6D-FA5C926F7C1D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commons", "Commons", "{197F741F-D5EB-4443-AC92-9994F8BE1080}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Jwt", "Common.Jwt\Common.Jwt.csproj", "{EC0F21C6-1BDA-4A21-96CA-DBDA8A321C1A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,16 +27,9 @@ Global
 		{A5630740-F26D-412B-AF6D-FA5C926F7C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5630740-F26D-412B-AF6D-FA5C926F7C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5630740-F26D-412B-AF6D-FA5C926F7C1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC0F21C6-1BDA-4A21-96CA-DBDA8A321C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC0F21C6-1BDA-4A21-96CA-DBDA8A321C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC0F21C6-1BDA-4A21-96CA-DBDA8A321C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC0F21C6-1BDA-4A21-96CA-DBDA8A321C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EC0F21C6-1BDA-4A21-96CA-DBDA8A321C1A} = {197F741F-D5EB-4443-AC92-9994F8BE1080}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B58E317D-2AFC-438C-A10A-692BE8445F7B}

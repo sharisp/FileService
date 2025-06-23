@@ -1,13 +1,13 @@
-﻿using FileService.Domain.Constants;
+﻿using Domain.SharedKernel.Interfaces;
+using FileService.Api.Dtos;
+using FileService.Domain.Constants;
 using FileService.Domain.Interface;
 using FileService.Domain.Service;
 using FileService.Infrastructure;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using FileService.Api.Dtos;
-using System.IO;
-using FluentValidation;
 
 namespace FileService.Api.Controllers
 {
@@ -44,15 +44,10 @@ namespace FileService.Api.Controllers
 
             if (addFlag || isExist)
             {
-                var urls = new List<Uri>();
-                if (upItem.AwsUri != null)
-                    urls.Add(upItem.AwsUri);
-                if (upItem.AzureUrl != null)
-                    urls.Add(upItem.AzureUrl);
-
-                return Ok(ApiResponse<List<Uri>>.Ok(urls));
+            
+                return Ok(ApiResponse<Uri>.Ok(upItem.GetPublicUri()));
             }
-            return Ok(ApiResponse<List<Uri>>.Fail("upload error"));
+            return Ok(ApiResponse<Uri>.Fail("upload error"));
         }
 
         [HttpPost("FileExists")]
@@ -69,9 +64,7 @@ namespace FileService.Api.Controllers
 
             var (exists, existFileUpload) = await fileUploadRepository.CheckFileExistsAsync(dto.FileHash, dto.FileSizeBytes);
 
-            return Ok(ApiResponse<CheckFileExistsResponseDto>.Ok(new CheckFileExistsResponseDto(exists, existFileUpload?.AwsUri)));
-
-
+            return Ok(ApiResponse<CheckFileExistsResponseDto>.Ok(new CheckFileExistsResponseDto(exists, existFileUpload?.GetPublicUri())));
 
         }
 

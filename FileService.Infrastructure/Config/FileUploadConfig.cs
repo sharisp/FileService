@@ -18,6 +18,7 @@ namespace FileService.Infrastructure.Config
           
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Id).ValueGeneratedNever();
+         
             builder.Property(e => e.FileName).IsUnicode().HasMaxLength(1024);
             builder.Property(e => e.FileSha256Hash).IsUnicode(false).HasMaxLength(64);
             builder.HasIndex(e => new { e.FileSha256Hash, e.FileSizeInBytes });

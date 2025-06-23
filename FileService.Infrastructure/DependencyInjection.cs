@@ -1,6 +1,8 @@
 ﻿using Amazon.S3;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Domain.SharedKernel.HelperFunctions;
+using Domain.SharedKernel.Interfaces;
 using FileService.Domain;
 using FileService.Domain.Interface;
 using FileService.Domain.Service;
@@ -25,7 +27,7 @@ namespace FileService.Infrastructure
             {
                 opt.UseSqlServer(configuration.GetConnectionString("SqlServer"));
             });
-
+           
             // Register IAmazonS3 client
             services.AddDefaultAWSOptions(configuration.GetAWSOptions("AWS"));
             services.AddAWSService<IAmazonS3>();
@@ -41,8 +43,7 @@ namespace FileService.Infrastructure
 
               
             });
-            var workerId = configuration.GetValue<int>("Snowflake:WorkerId");
-            IdGeneratorFactory.Initialize(workerId);
+           
             // 注册 BlobContainerClient
             services.AddScoped(sp =>
             {
@@ -55,8 +56,9 @@ namespace FileService.Infrastructure
             //services.AddScoped<IStorageClient, UpYunStorageClient>();
             services.AddScoped<IFileStorageClient, AwsS3StorageClient>();
             services.AddScoped<IFileUploadRepository, FileUploadRepository>();
-            services.AddScoped<FileUploadService>();
-
+            services.AddDomainSructure(configuration);
+            services.AddScoped<ICurrentUser, CurrentUser>();
+      
             services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddHttpClient<ApiClientHelper>();
             return services;

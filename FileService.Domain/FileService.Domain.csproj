@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Andrew.Domain.SharedKernel" Version="1.0.0" />
     <PackageReference Include="IdGen" Version="3.0.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
   </ItemGroup>

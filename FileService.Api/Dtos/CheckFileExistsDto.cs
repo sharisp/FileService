@@ -16,7 +16,7 @@ namespace FileService.Api.Dtos
 
             RuleFor(x => x.FileHash)
                 .NotEmpty().WithMessage("FileHash is required.")
-                .Length(36).WithMessage("FileHash is not correct.");
+                .Length(64).WithMessage("FileHash is not correct.");
 
             RuleFor(x => x.FileSizeBytes)
                
