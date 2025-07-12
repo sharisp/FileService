@@ -6,9 +6,9 @@ namespace FileService.Infrastructure.Repository
 {
     public class FileUploadRepository : IFileUploadRepository
     {
-        private readonly BaseDbContext dbContext;
+        private readonly AppDbContext dbContext;
 
-        public FileUploadRepository(BaseDbContext dbContext)
+        public FileUploadRepository(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

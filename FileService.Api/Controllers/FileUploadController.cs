@@ -1,4 +1,5 @@
 ﻿using Domain.SharedKernel.Interfaces;
+using FileService.Api.Attributes;
 using FileService.Api.Dtos;
 using FileService.Domain.Constants;
 using FileService.Domain.Interface;
@@ -11,12 +12,13 @@ using System.Security.Claims;
 
 namespace FileService.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class FileUploadController(FileUploadService domainService, IFileUploadRepository fileUploadRepository, IUnitOfWork unitOfWork, IConfiguration configuration, ApiClientHelper apiClientHelper, IValidator<CheckFileExistsRequestDto> validator) : ControllerBase
+    public class FileUploadController(FileUploadService domainService, IFileUploadRepository fileUploadRepository, IUnitOfWork unitOfWork, IValidator<CheckFileExistsRequestDto> validator) : ControllerBase
     {
         [HttpPost]
-        [Authorize]
+        [PermissionKey("FileUpload.Upload")]
         [RequestSizeLimit(60_000_000)]
         public async Task<ActionResult<ApiResponse<Uri>>> Upload(IFormFile file, CancellationToken cancellationToken = default)
         {
@@ -24,12 +26,7 @@ namespace FileService.Api.Controllers
             {
                 return Ok(ApiResponse<Uri>.Fail("file size must be bigger than 0 and less than 50MB"));
             }
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var res = await CheckPermission(Convert.ToInt64(userId), cancellationToken);
-            if (res == false)
-            {
-                return Ok(ApiResponse<List<Uri>>.Fail("no permission"));
-            }
+
 
             string fileName = file.FileName;
             using Stream stream = file.OpenReadStream();
@@ -44,58 +41,24 @@ namespace FileService.Api.Controllers
 
             if (addFlag || isExist)
             {
-            
+
                 return Ok(ApiResponse<Uri>.Ok(upItem.GetPublicUri()));
             }
             return Ok(ApiResponse<Uri>.Fail("upload error"));
         }
 
         [HttpPost("FileExists")]
-        //[Authorize]
+        [PermissionKey("FileUpload.FileExists")]
         public async Task<ActionResult<ApiResponse<CheckFileExistsResponseDto>>> CheckFileExists(CheckFileExistsRequestDto dto, CancellationToken cancellationToken = default)
         {
             await ValidationHelper.ValidateModelAsync(dto, validator);
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var res = await CheckPermission(Convert.ToInt64(userId), cancellationToken);
-            if (res == false)
-            {
-                return Ok(ApiResponse<CheckFileExistsResponseDto>.Fail("no permission"));
-            }
 
             var (exists, existFileUpload) = await fileUploadRepository.CheckFileExistsAsync(dto.FileHash, dto.FileSizeBytes);
 
-            return Ok(ApiResponse<CheckFileExistsResponseDto>.Excute(exists,"",200,new CheckFileExistsResponseDto(exists, existFileUpload?.GetPublicUri())));
+            return Ok(ApiResponse<CheckFileExistsResponseDto>.Excute(exists, "", 200, new CheckFileExistsResponseDto(exists, existFileUpload?.GetPublicUri())));
 
         }
 
-        private async Task<bool> CheckPermission(long userId, CancellationToken cancellation = default)
-        {
-            var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-            var token = authHeader.StartsWith("Bearer ") ? authHeader.Substring(7) : authHeader;
-            if (string.IsNullOrEmpty(token))
-            {
-                return false;
-            }
-            var url = configuration["OuterApiUrl:CheckPermissionApiUrl"];
-            if (string.IsNullOrEmpty(url))
-            {
-                return false;
-            }
 
-            var dto = new
-            {
-                PermissionKey = "FileUpload.Upload",
-                UserId = userId,
-                SystemName = ConstantValues.SystemName
-            };
-            apiClientHelper.SetBearerToken(token);
-            var res = await apiClientHelper.PostAsync<ApiResponse<string>>(url, dto);
-            if (res?.Success == true)
-            {
-                return true;
-            }
-            return false;
-
-        }
     }
 }

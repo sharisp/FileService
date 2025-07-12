@@ -49,7 +49,7 @@ namespace FileService.Domain.Service
 
             string filePath = $"{timeNow.Year}/{timeNow.Month}/{timeNow.Day}/{fileSha256Hash}/{fileName}";
 
-            // 读取原始文件流到内存中
+            fStream.Seek(0, SeekOrigin.Begin);
             using var  ms1 = new MemoryStream();
             await fStream.CopyToAsync(ms1, cancellationToken);
             ms1.Position = 0;

@@ -10,8 +10,8 @@ namespace FileService.Infrastructure
     {
         private readonly ICurrentUser currentUser;
         private readonly IMediator mediatR;
-        private readonly BaseDbContext dbContext;
-        public UnitOfWork(DbContextOptions options, ICurrentUser currentUser, IMediator mediatR, BaseDbContext dbContext)
+        private readonly AppDbContext dbContext;
+        public UnitOfWork(DbContextOptions options, ICurrentUser currentUser, IMediator mediatR, AppDbContext dbContext)
         {
             this.currentUser = currentUser;
             this.mediatR = mediatR;

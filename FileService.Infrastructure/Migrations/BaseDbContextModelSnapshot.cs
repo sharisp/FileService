@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FileService.Infrastructure.Migrations
 {
-    [DbContext(typeof(BaseDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class BaseDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.6")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -45,7 +45,7 @@ namespace FileService.Infrastructure.Migrations
                     b.Property<long?>("DeleterUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Descriptions")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FileService.Infrastructure.Migrations
 {
-    [DbContext(typeof(BaseDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20250618094936_url-emputy")]
     partial class urlemputy
     {

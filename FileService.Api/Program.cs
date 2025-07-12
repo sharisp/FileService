@@ -7,6 +7,7 @@ using FileService.Infrastructure;
 using FluentValidation;
 using System.Reflection;
 using Domain.SharedKernel.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FileService.Api
 {
@@ -18,22 +19,16 @@ namespace FileService.Api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-
-
-            builder.Services.AddHttpContextAccessor(); //for accessing HttpContext in services IHttpContextAccessor
+       
+            builder.Services.AddCommonApiCollection(builder.Configuration);
          
-            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            builder.Services.AddSwaggerGen();
-         
-            builder.Services.AddJWTAuthentication(builder.Configuration);
+
             builder.Services.AddFileInfrastructure(builder.Configuration);
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
-                typeof(IUnitOfWork).Assembly,
-                typeof(FileUploadController).Assembly //
-            ));
+          
+
             var app = builder.Build();
+            app.UseRouting();
+            app.UseCors("AllowAll");
             app.UseMiddleware<CustomerExceptionMiddleware>();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -41,25 +36,28 @@ namespace FileService.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            else
-            {
-                var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-                app.Urls.Add($"http://*:{port}");
+            /*  else
+              {
+                  var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+                  app.Urls.Add($"http://*:{port}");
 
-                app.MapGet("/", () => "Hello from DotnetCore!");
-            }
+
+              }*/
 
 
 
             app.UseCors();
-         //   app.UseForwardedHeaders();
+            //   app.UseForwardedHeaders();
             //app.UseHttpsRedirection();//不能与ForwardedHeaders很好的工作，而且webapi项目也没必要配置这个
-            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapGet("/", [AllowAnonymous] () => "Hello from Listen Admin!");
+
 
 
             app.MapControllers();
 
+            app.UseMiddleware<CustomPermissionCheckMiddleware>();
             app.Run();
         }
     }
