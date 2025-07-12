@@ -1,7 +1,6 @@
 ﻿using Amazon.S3;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Domain.SharedKernel;
 using Domain.SharedKernel.Interfaces;
 using FileService.Domain;
 using FileService.Domain.Interface;
@@ -9,7 +8,6 @@ using FileService.Infrastructure.Options;
 using FileService.Infrastructure.Repository;
 using FileService.Infrastructure.StoreClients;
 using Infrastructure.SharedKernel;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
