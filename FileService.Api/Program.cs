@@ -8,6 +8,7 @@ using FluentValidation;
 using System.Reflection;
 using Domain.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Listening.Admin.Api;
 
 namespace FileService.Api
 {
@@ -19,12 +20,12 @@ namespace FileService.Api
 
             // Add services to the container.
 
-       
             builder.Services.AddCommonApiCollection(builder.Configuration);
-         
+
 
             builder.Services.AddFileInfrastructure(builder.Configuration);
-          
+
+            builder.Services.AddScoped<PermissionCheckHelper>();
 
             var app = builder.Build();
             app.UseRouting();
