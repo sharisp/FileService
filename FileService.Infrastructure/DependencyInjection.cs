@@ -24,7 +24,17 @@ namespace FileService.Infrastructure
             services.AddDomainCollection(configuration);
             // Register IAmazonS3 client
             services.AddDefaultAWSOptions(configuration.GetAWSOptions("AWS"));
-            services.AddAWSService<IAmazonS3>();
+         
+
+            if (configuration.GetValue<bool>("AWS:IsUpload"))
+            {
+                services.AddAWSService<IAmazonS3>();
+            }
+            else
+            {
+                services.AddSingleton<IAmazonS3>(new NullAmazonS3Client());
+            }
+
 
             var azureStorageSettings = configuration.GetSection("AzureStorage").Get<AzureBlobOptions>();
             services.AddAzureClients(clientBuilder =>
