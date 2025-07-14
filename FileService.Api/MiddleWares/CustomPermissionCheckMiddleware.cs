@@ -1,4 +1,5 @@
 ﻿using FileService.Api.Attributes;
+using FileService.Domain.Constants;
 using Infrastructure.SharedKernel;
 using Listening.Admin.Api;
 using Microsoft.AspNetCore.Authorization;
@@ -67,6 +68,18 @@ public class CustomPermissionCheckMiddleware(
                 await next(context);
                 return;
             }
+
+            string? permissionStr = context?.User.FindFirst("permissions")?.Value;
+            if (!string.IsNullOrWhiteSpace(permissionStr))
+            {
+                var permissions = permissionStr.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                if (permissions.Contains(ConstantValues.SystemName + "." + permissionKey, StringComparer.OrdinalIgnoreCase))
+                {
+                    await next(context);
+                    return;
+                }
+            }
+
             //can not use DI here
             var permissionHelper = context.RequestServices.GetRequiredService<PermissionCheckHelper>();
 
