@@ -39,13 +39,13 @@ namespace FileService.Infrastructure.StoreClients
 
             var fileTransferUtility = new TransferUtility(_s3Client);
 
+            string fileContentType = FileHelper.GetContentType(filePath);
             var uploadRequest = new TransferUtilityUploadRequest
             {
                 InputStream = fileStream,
                 BucketName = _bucketName,
                 Key = filePath,
-                // 当没有明确的 ContentType 时，使用默认的通用二进制流类型
-                ContentType = "application/octet-stream"
+                ContentType = fileContentType
             };
 
             await fileTransferUtility.UploadAsync(uploadRequest, cancellationToken);

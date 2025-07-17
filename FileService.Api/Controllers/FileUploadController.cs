@@ -5,7 +5,10 @@ using FileService.Domain.Constants;
 using FileService.Domain.Interface;
 using FileService.Domain.Service;
 using FileService.Infrastructure;
+using FileService.Infrastructure.Repository;
+using FileService.Infrastructure.StoreClients;
 using FluentValidation;
+using Infrastructure.SharedKernel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -13,6 +16,7 @@ using System.Security.Claims;
 namespace FileService.Api.Controllers
 {
     [Authorize]
+    //   [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class FileUploadController(FileUploadService domainService, IFileUploadRepository fileUploadRepository, IUnitOfWork unitOfWork, IValidator<CheckFileExistsRequestDto> validator) : ControllerBase
@@ -58,6 +62,7 @@ namespace FileService.Api.Controllers
             return Ok(ApiResponse<CheckFileExistsResponseDto>.Excute(exists, "", 200, new CheckFileExistsResponseDto(exists, existFileUpload?.GetPublicUri())));
 
         }
+
 
 
     }

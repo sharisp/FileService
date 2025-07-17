@@ -57,6 +57,8 @@ namespace FileService.Infrastructure
                 return containerClient;
             });
             services.AddScoped<IFileStorageClient, AzureBlobStorageClient>();
+
+            services.AddScoped<AzureBlobStorageClient>();
             //services.AddScoped<IStorageClient, UpYunStorageClient>();
             services.AddScoped<IFileStorageClient, AwsS3StorageClient>();
             services.AddScoped<IFileUploadRepository, FileUploadRepository>();

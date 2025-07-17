@@ -36,7 +36,7 @@ namespace FileService.Api
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                app.Urls.Add($"http://*:5018");
+             //   app.Urls.Add($"http://*:5018");
             }
             /*  else
               {
