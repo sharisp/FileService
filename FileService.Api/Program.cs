@@ -1,14 +1,7 @@
-
-using Common.Jwt;
-using FileService.Api.Controllers;
 using FileService.Api.MiddleWares;
-using FileService.Domain;
 using FileService.Infrastructure;
-using FluentValidation;
-using System.Reflection;
-using Domain.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Listening.Admin.Api;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FileService.Api
 {

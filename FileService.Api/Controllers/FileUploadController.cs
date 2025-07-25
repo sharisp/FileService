@@ -1,17 +1,11 @@
 ﻿using Domain.SharedKernel.Interfaces;
 using FileService.Api.Attributes;
 using FileService.Api.Dtos;
-using FileService.Domain.Constants;
 using FileService.Domain.Interface;
 using FileService.Domain.Service;
-using FileService.Infrastructure;
-using FileService.Infrastructure.Repository;
-using FileService.Infrastructure.StoreClients;
 using FluentValidation;
-using Infrastructure.SharedKernel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace FileService.Api.Controllers
 {
