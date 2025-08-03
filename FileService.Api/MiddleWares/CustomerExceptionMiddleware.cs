@@ -15,13 +15,10 @@ namespace FileService.Api.MiddleWares
             }
             catch (Exception ex)
             {
-                //  httpContext.Response.ContentType = "application/problem+json";
-
                 httpContext.Response.ContentType = "application/json";
                 httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 //  logger.LogError("WebApi——error", ex);
-              var res = ApiResponse<string>.Fail(ex.Message);
-              // var res = ex.Message;
+                var res = ApiResponse<string>.Fail(ex.Message);               
                 await httpContext.Response.WriteAsJsonAsync(res);
             }
         }
