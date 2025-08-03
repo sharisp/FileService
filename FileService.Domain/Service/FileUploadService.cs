@@ -17,7 +17,16 @@ namespace FileService.Domain.Service
             this.awsStorageClient = fileStorageClients.First(c => c.StorageType == StorageType.AwsS3);
             this.azureStorageClient = fileStorageClients.First(c => c.StorageType == StorageType.Azure);
         }
-
+        /// <summary>
+        /// UploadFileAsync
+        /// </summary>
+        /// <param name="fStream">fStream</param>
+        /// <param name="fileName">fileName</param>
+        /// <param name="createUserId">createUserId</param>
+        /// <param name="cancellationToken">cancellationToken</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<(bool,FileUpload)> UploadFileAsync(Stream fStream, string fileName, long createUserId = 0, CancellationToken cancellationToken = default)
         {
 
