@@ -18,8 +18,7 @@ namespace FileService.Api.Dtos
                 .NotEmpty().WithMessage("FileHash is required.")
                 .Length(64).WithMessage("FileHash is not correct.");
 
-            RuleFor(x => x.FileSizeBytes)
-               
+            RuleFor(x => x.FileSizeBytes)               
                 .GreaterThan(0).WithMessage("FileSizeBytes must be at greater than 0.");
         }
     }
