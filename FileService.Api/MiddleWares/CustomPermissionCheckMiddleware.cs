@@ -8,7 +8,11 @@ using System.Security.Claims;
 
 namespace FileService.Api.MiddleWares;
 
-
+/// <summary>
+/// permission check middleware
+/// </summary>
+/// <param name="next"></param>
+/// <param name="logger"></param>
 public class CustomPermissionCheckMiddleware(
     RequestDelegate next,
     ILogger<CustomPermissionCheckMiddleware> logger)
