@@ -40,7 +40,6 @@ namespace FileService.Api
                     System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
                     | System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString;
             });
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
               typeof(IUnitOfWork).Assembly,

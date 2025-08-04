@@ -6,7 +6,13 @@ namespace Listening.Admin.Api
 {
     public class PermissionCheckHelper(IConfiguration configuration, ApiClientHelper apiClientHelper, IHttpContextAccessor httpContextAccessor)
     {
-
+        /// <summary>
+        /// Permission Check Helper
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="permissionKey"></param>
+        /// <param name="cancellation"></param>
+        /// <returns></returns>
         public async Task<bool> CheckPermission(long userId, string permissionKey, CancellationToken cancellation = default)
         {
 
