@@ -17,7 +17,10 @@ namespace FileService.Infrastructure
             this.mediatR = mediatR;
             this.dbContext = dbContext;
         }
-
+        /// <summary>
+        /// override SaveChanges to handle sync operations and dispatch domain events
+        /// </summary>
+        /// <returns></returns>
         public int SaveChanges()
         {
             UpdateEntities(this.dbContext);
