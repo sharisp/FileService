@@ -17,11 +17,17 @@ namespace FileService.Infrastructure
             this.mediatR = mediatR;
             this.dbContext = dbContext;
         }
+
         public int SaveChanges()
         {
             UpdateEntities(this.dbContext);
             return this.dbContext.SaveChanges();
         }
+        /// <summary>
+        /// override SaveChangesAsync to handle async operations and dispatch domain events
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
