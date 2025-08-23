@@ -8,6 +8,11 @@ namespace FileService.Infrastructure
 {
     public class FileHelper
     {
+        /// <summary>
+        /// get file content type based on file extension
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static string GetContentType(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
