@@ -2,6 +2,9 @@
 
 namespace FileService.Api.Dtos
 {
+    /// <summary>
+    /// file exists request dto
+    /// </summary>
     public record CheckFileExistsRequestDto
     {
         public long FileSizeBytes { get; set; }
