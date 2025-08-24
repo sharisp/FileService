@@ -70,7 +70,7 @@ namespace FileService.Infrastructure
                             break;
 
                         case EntityState.Deleted:
-                            // 软删除：标记删除，不直接从数据库删除
+                            
                             entry.State = EntityState.Modified;
                             entry.Entity.IsDel = true;
                             entry.Entity.DeleterUserId = currentUser?.UserId;
